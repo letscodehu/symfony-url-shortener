@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\ShortUrl;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,9 +15,9 @@ class CreateShortUrl extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url_to_shorten', UrlType::class)
-            ->add("custom_alias", TextType::class,
-            ["label" => "https://miniurl.com/"])
+            ->add('target', TextType::class, ["label" => "URL to shorten"])
+            ->add("source", TextType::class,
+            ["label" => "https://miniurl.com/", "required" => false])
             ->add("submit", SubmitType::class,
             ["label" => "Make miniURL!"]);
     }
@@ -24,7 +25,7 @@ class CreateShortUrl extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            "data_class" => ShortUrl::class
         ]);
     }
 }

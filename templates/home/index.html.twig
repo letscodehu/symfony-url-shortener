@@ -12,9 +12,9 @@
     <p>By entering in a URL in the text field below, we will create a mini URL that will not break in emails and never expires.</p>
     {{ form_start(form) }}
     {{ form_errors(form) }}
-    {{ form_row(form.url_to_shorten) }}
+    {{ form_row(form.target) }}
     <p>Custom alias (optional)</p>
-    {{ form_row(form.custom_alias) }}
+    {{ form_row(form.source) }}
     {{ form_row(form.submit) }}
     {{ form_end(form) }}
 </div>
