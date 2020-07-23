@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome to MiniURL!{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+ <h1>Welcome to MiniURL!</h1>
+    <p>By entering in a URL in the text field below, we will create a mini URL that will not break in emails and never expires.</p>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.url_to_shorten) }}
+    <p>Custom alias (optional)</p>
+    {{ form_row(form.custom_alias) }}
+    {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+</div>
+{% endblock %}
