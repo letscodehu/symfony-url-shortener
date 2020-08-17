@@ -13,12 +13,13 @@ class ShortUrl
      * @var string
      * @Assert\NotBlank
      * @Assert\Url
-     * @NotExists
      */
     private string $target = "";
+
     /**
      * @var string|null
      * @Assert\Length(min = 8)
+     * @NotExists
      */
     private ?string $source = null;
 
