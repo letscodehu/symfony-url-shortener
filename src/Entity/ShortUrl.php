@@ -5,7 +5,11 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Constraint\NotExists;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ */
 class ShortUrl
 {
 
@@ -13,6 +17,7 @@ class ShortUrl
      * @var string
      * @Assert\NotBlank
      * @Assert\Url
+     * @ORM\Column(type="string", length=255)
      */
     private string $target = "";
 
@@ -20,6 +25,8 @@ class ShortUrl
      * @var string|null
      * @Assert\Length(min = 8)
      * @NotExists
+     * @ORM\Column(type="string", length=36)
+     * @ORM\Id
      */
     private ?string $source = null;
 
