@@ -4,12 +4,24 @@ namespace App\Controller;
 
 use App\Entity\ShortUrl;
 use App\Form\CreateShortUrl;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ShortUrlProcessController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    /**
+     * ShortUrlProcessController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/", name="short_url_process", methods={"POST"})
      */
@@ -20,7 +32,8 @@ class ShortUrlProcessController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $shortUrl = $form->getData();
-            // do something
+            $this->entityManager->persist($shortUrl);
+            $this->entityManager->flush();
             return $this->redirectToRoute("short_url_processed");
         } else {
             return $this->render('home/index.html.twig', [
