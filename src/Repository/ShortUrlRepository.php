@@ -4,17 +4,23 @@
 namespace App\Repository;
 
 
-use Doctrine\DBAL\Connection;
+use App\Entity\ShortUrl;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
-class ShortUrlRepository
+/**
+ * Class ShortUrlRepository
+ * @method ShortUrl|null find($id, $lockMode = null, $lockVersion = null)
+ */
+class ShortUrlRepository extends ServiceEntityRepository
 {
-    private Connection $connection;
-
-    /**
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->connection = $connection;
+        parent::__construct($registry, ShortUrl::class);
+    }
+
+    public function save(ShortUrl $shortUrl) : void {
+        $this->_em->persist($shortUrl);
+        $this->_em->flush();
     }
 }

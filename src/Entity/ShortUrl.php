@@ -5,10 +5,11 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Constraint\NotExists;
+use App\Repository\ShortUrlRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ShortUrlRepository::class)
  */
 class ShortUrl
 {
