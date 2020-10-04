@@ -1,15 +1,12 @@
 <?php
 
-
 namespace App\Repository;
-
 
 use App\Entity\ShortUrl;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class ShortUrlRepository
  * @method ShortUrl|null find($id, $lockMode = null, $lockVersion = null)
  */
 class ShortUrlRepository extends ServiceEntityRepository
@@ -19,7 +16,8 @@ class ShortUrlRepository extends ServiceEntityRepository
         parent::__construct($registry, ShortUrl::class);
     }
 
-    public function save(ShortUrl $shortUrl) : void {
+    public function save(ShortUrl $shortUrl) : void
+    {
         $this->_em->persist($shortUrl);
         $this->_em->flush();
     }

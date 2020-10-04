@@ -8,13 +8,11 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/tacsiazuma/series/php/url_shortener/src/Controller/ShortUrlProcessedController.php'|file_link(0) }}">src/Controller/ShortUrlProcessedController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/tacsiazuma/series/php/url_shortener/templates/short_url_processed/index.html.twig'|file_link(0) }}">templates/short_url_processed/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="example-wrapper">
+        <h1>MiniURL was created!</h1>
+        <p>The following URL:</p>
+        <p><b>{{ app.flashes('target')[0] }}</b></p>
+        <p>has a length of {{ app.flashes('targetLength')[0] }} characters and resulted in the following MiniURL which has the length of {{ app.flashes('sourceLength')[0] }} characters:</p>
+        <p><b>{{ app.flashes('source')[0] }}</b></p>
+    </div>
 {% endblock %}

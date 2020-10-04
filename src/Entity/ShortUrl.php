@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\ShortUrlRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Constraint\NotExists;
-use App\Repository\ShortUrlRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

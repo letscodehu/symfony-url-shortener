@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ShortUrl;
 use App\Form\CreateShortUrl;
 use App\Repository\ShortUrlRepository;
+use App\Service\ShortUrlService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,15 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShortUrlProcessController extends AbstractController
 {
-    private ShortUrlRepository $repository;
+    private ShortUrlService $shortUrlService;
 
     /**
      * ShortUrlProcessController constructor.
-     * @param ShortUrlRepository $repository
+     * @param ShortUrlService $shortUrlService
      */
-    public function __construct(ShortUrlRepository $repository)
+    public function __construct(ShortUrlService $shortUrlService)
     {
-        $this->repository = $repository;
+        $this->shortUrlService = $shortUrlService;
     }
 
     /**
@@ -33,7 +34,11 @@ class ShortUrlProcessController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $shortUrl = $form->getData();
-            $this->repository->save($shortUrl);
+            $result = $this->shortUrlService->create($shortUrl, $request->getSchemeAndHttpHost());
+            $this->addFlash("target", $result->getTarget());
+            $this->addFlash("source", $result->getSource());
+            $this->addFlash("targetLength", $result->getTargetLength());
+            $this->addFlash("sourceLength", $result->getSourceLength());
             return $this->redirectToRoute("short_url_processed");
         } else {
             return $this->render('home/index.html.twig', [

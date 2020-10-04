@@ -2,35 +2,33 @@
 
 namespace App\Controller;
 
-use App\Entity\ShortUrl;
 use App\Repository\ShortUrlRepository;
+use App\Service\ShortUrlService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ShortUrlFollowController extends AbstractController
 {
-    private ShortUrlRepository $repository;
+    private ShortUrlService $shortUrlService;
 
     /**
      * ShortUrlFollowController constructor.
-     * @param ShortUrlRepository $repository
+     * @param ShortUrlService $shortUrlService
      */
-    public function __construct(ShortUrlRepository $repository)
+    public function __construct(ShortUrlService $shortUrlService)
     {
-        $this->repository = $repository;
+        $this->shortUrlService = $shortUrlService;
     }
 
     /**
-     * @Route("/{source}", name="short_url_follow")
+     * @Route("/{source<^(?!success).+>}", name="short_url_follow")
      * @param string $source
-     * @return RedirectResponse
      */
     public function index(string $source)
     {
-        $shortUrl = $this->repository->find($source);
+        $shortUrl = $this->shortUrlService->find($source);
         if ($shortUrl == null) {
-            $this->createNotFoundException("Unable to find a URL to redirect to.");
+            throw $this->createNotFoundException("Unable to find a URL to redirect to.");
         }
         return $this->redirect($shortUrl->getTarget());
     }
