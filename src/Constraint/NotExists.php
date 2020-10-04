@@ -13,8 +13,10 @@ use Symfony\Component\Validator\Constraint;
 class NotExists extends Constraint
 {
 
- public function validatedBy() :string
-{
-    return NotExistsValidator::class;
-}
+    public $message = "The alias '{{ string }}' is already exists in our system. Please choose a different alias or let our system generate one.";
+
+     public function validatedBy() :string
+    {
+        return NotExistsValidator::class;
+    }
 }
