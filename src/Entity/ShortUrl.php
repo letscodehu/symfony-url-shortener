@@ -20,7 +20,7 @@ class ShortUrl
      * @Assert\Url
      * @ORM\Column(type="string", length=255)
      */
-    private string $target = "";
+    private ?string $target = "";
 
     /**
      * @var string|null
@@ -32,17 +32,17 @@ class ShortUrl
     private ?string $source = null;
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTarget(): string
+    public function getTarget(): ?string
     {
         return $this->target;
     }
 
     /**
-     * @param string $target
+     * @param ?string $target
      */
-    public function setTarget(string $target): void
+    public function setTarget(?string $target): void
     {
         $this->target = $target;
     }
