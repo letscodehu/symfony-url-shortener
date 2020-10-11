@@ -27,3 +27,7 @@ services:
     # please note that last definitions always *replace* previous ones
     Hidehalo\Nanoid\Client:
         class: 'Hidehalo\Nanoid\Client'
+
+    shortUrlService:
+        public: true
+        class: 'App\Service\ShortUrlService'

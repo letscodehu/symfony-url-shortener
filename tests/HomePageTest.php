@@ -30,21 +30,23 @@ class HomePageTest extends WebTestCase
         // WHEN
         $this->visitHomePage();
         // THEN
-        $this->assertSelectorTextContains("button", "Make miniURL!");
+        $this->assertSelectorTextContains('button', 'Make miniURL!');
     }
+
     public function testHomePageFormFields()
     {
         // GIVEN
         // WHEN
         $this->visitHomePage();
         // THEN
-        $this->assertSelectorExists("input#create_short_url_target", "The target input field should exists!");
-        $this->assertSelectorExists("input#create_short_url_source", "The source input field should exists!");
+        $this->assertSelectorExists("input#create_short_url_target", "The 'target' input field should exist!");
+        $this->assertSelectorExists("input#create_short_url_source", "The 'source' input field should exist!");
     }
 
-    public function visitHomePage(): void
+    private function visitHomePage(): void
     {
         $client = static::createClient();
         $client->request('GET', '/');
     }
+
 }
