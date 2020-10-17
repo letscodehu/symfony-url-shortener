@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ShortUrlProcessedController!{% endblock %}
+{% block title %}MiniURL was created!{% endblock %}
 
 {% block body %}
 <style>
@@ -11,8 +11,8 @@
     <div class="example-wrapper">
         <h1>MiniURL was created!</h1>
         <p>The following URL:</p>
-        <p><b>{{ app.flashes('target')[0] }}</b></p>
+        <p><b id="target_url">{{ app.flashes('target')[0] }}</b></p>
         <p>has a length of {{ app.flashes('targetLength')[0] }} characters and resulted in the following MiniURL which has the length of {{ app.flashes('sourceLength')[0] }} characters:</p>
-        <p><b>{{ app.flashes('source')[0] }}</b></p>
+        <p><b id="source_url">{{ app.flashes('source')[0] }}</b></p>
     </div>
 {% endblock %}
